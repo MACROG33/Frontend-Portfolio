@@ -72,8 +72,14 @@ export default function Home() {
 
   if (loading)
     return (
-      <div className="min-h-screen bg-navy flex items-center justify-center text-gold font-condensed text-3xl font-black uppercase tracking-widest animate-pulse">
-        Loading...
+      <div className="min-h-screen bg-navy flex flex-col items-center justify-center text-center px-4">
+        <div className="text-gold font-condensed text-3xl font-black uppercase tracking-widest animate-pulse mb-3">
+          Loading...
+        </div>
+        <div className="text-slate-300 text-sm md:text-base font-light tracking-wide animate-pulse">
+          กำลังปลุกเซิร์ฟเวอร์หลังบ้าน... <br className="hidden md:block" />
+          (ระบบอาจใช้เวลาเริ่มต้นประมาณ 50 วินาที รอนิดนึงนะครับ!)
+        </div>
       </div>
     );
 
