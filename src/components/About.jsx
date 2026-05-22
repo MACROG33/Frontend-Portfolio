@@ -19,31 +19,50 @@ export default function About({ profile }) {
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex gap-3 items-center">
-            <span className="font-bold text-[0.85rem] tracking-[1px] uppercase text-navy min-w-[100px]">Name</span>
-            <span className="text-[#5a6a75] text-[0.95rem]">{profile?.name || "Palm"}</span>
+            <span className="font-bold text-[0.85rem] tracking-[1px] uppercase text-navy min-w-[100px]">
+              Name
+            </span>
+            <span className="text-[#5a6a75] text-[0.95rem]">
+              {profile?.name || "Palm"}
+            </span>
           </div>
           <div className="flex gap-3 items-center">
-            <span className="font-bold text-[0.85rem] tracking-[1px] uppercase text-navy min-w-[100px]">Focus</span>
-            <span className="text-[#5a6a75] text-[0.95rem]">Full-Stack / AI</span>
+            <span className="font-bold text-[0.85rem] tracking-[1px] uppercase text-navy min-w-[100px]">
+              Focus
+            </span>
+            <span className="text-[#5a6a75] text-[0.95rem]">
+              Full-Stack / AI
+            </span>
           </div>
           <div className="flex gap-3 items-center">
-            <span className="font-bold text-[0.85rem] tracking-[1px] uppercase text-navy min-w-[100px]">Email</span>
-            <a href={profile?.email ? `mailto:${profile.email}` : "mailto:66011212003@msu.ac.th"} className="text-gold no-underline">
+            <span className="font-bold text-[0.85rem] tracking-[1px] uppercase text-navy min-w-[100px]">
+              Email
+            </span>
+            <a
+              href={
+                profile?.email
+                  ? `mailto:${profile.email}`
+                  : "mailto:66011212003@msu.ac.th"
+              }
+              className="text-gold no-underline"
+            >
               {profile?.email || "66011212003@msu.ac.th"}
             </a>
           </div>
           <div className="flex gap-3 items-center">
-            <span className="font-bold text-[0.85rem] tracking-[1px] uppercase text-navy min-w-[100px]">Tel</span>
+            <span className="font-bold text-[0.85rem] tracking-[1px] uppercase text-navy min-w-[100px]">
+              Tel
+            </span>
             <span className="text-[#5a6a75] text-[0.95rem]">098-226-8073</span>
           </div>
           <div className="mt-8">
             <a
-              href={profile?.resume_url || "#"}
+              href="/Resume_.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-8 py-3 bg-navy text-gold font-black uppercase tracking-widest rounded hover:bg-navy-dark transition-all duration-200 border border-gold hover:shadow-[0_0_15px_rgba(201,168,76,0.3)]"
             >
-              Download Resume
+              View Resume
             </a>
           </div>
         </div>
