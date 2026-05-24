@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Projects({ projects }) {
   return (
     <section id="projects" className="py-20 px-[6%] bg-white-soft">
@@ -10,7 +12,7 @@ export default function Projects({ projects }) {
             key={proj._id || proj.id}
             className="bg-navy rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.2)] transition-all duration-250 flex flex-col reveal"
           >
-            {/* ส่วนรูปภาพ - ดึงรูปแรกสุดจาก image_urls */}
+            {/* ส่วนรูปภาพ*/}
             <div className="h-48 bg-gradient-to-br from-navy-mid to-navy-dark flex items-center justify-center text-6xl relative overflow-hidden">
               {proj.image_urls && proj.image_urls.length > 0 ? (
                 <img
@@ -33,7 +35,6 @@ export default function Projects({ projects }) {
                 {proj.description}
               </p>
 
-              {}
               <div className="flex gap-2 flex-wrap mb-6">
                 {proj.tech_stack?.map((tag, idx) => (
                   <span
@@ -83,10 +84,8 @@ export default function Projects({ projects }) {
                   )}
                 </div>
 
-                <button
-                  onClick={() =>
-                    (window.location.href = `/projects/${proj.id}`)
-                  }
+                <Link
+                  to={`/projects/${proj._id || proj.id}`}
                   className="group flex items-center gap-2 text-[0.75rem] font-black uppercase tracking-[2px] text-gold hover:text-white transition-all duration-300"
                 >
                   View Details
@@ -99,7 +98,7 @@ export default function Projects({ projects }) {
                   >
                     <path d="M5 12h14m-7-7l7 7-7 7" />
                   </svg>
-                </button>
+                </Link>
               </div>
             </div>
           </div>

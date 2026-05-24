@@ -115,13 +115,16 @@ export default function SkillsManager() {
         )}
       </div>
 
-      <div className={`p-6 rounded-xl border mb-8 space-y-6 transition-colors ${editingGroupId ? "bg-gold/10 border-gold" : "bg-gray-50 border-gray-200"}`}>
+      <div
+        className={`p-6 rounded-xl border mb-8 space-y-6 transition-colors ${editingGroupId ? "bg-gold/10 border-gold" : "bg-gray-50 border-gray-200"}`}
+      >
         {editingGroupId && (
           <div className="text-gold font-bold uppercase tracking-widest flex items-center gap-2">
             ✏️ โหมดแก้ไขหมวดหมู่ทักษะ
           </div>
         )}
 
+        {/* ฟอร์มกรอกข้อมูล (อันนี้ Responsive อยู่แล้ว) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-bold text-navy uppercase mb-1">
@@ -182,7 +185,7 @@ export default function SkillsManager() {
           <button
             type="button"
             onClick={handleAddTempItem}
-            className="mt-2 px-4 py-1.5 bg-gray-200 text-navy font-bold text-sm rounded hover:bg-gray-300"
+            className="mt-2 px-4 py-1.5 bg-gray-200 text-navy font-bold text-sm rounded hover:bg-gray-300 w-full md:w-auto"
           >
             + Add to List
           </button>
@@ -195,14 +198,30 @@ export default function SkillsManager() {
             </label>
             <div className="flex flex-wrap gap-2">
               {items.map((item, idx) => (
-                <div key={idx} className="flex items-center gap-2 bg-navy text-white px-3 py-1 rounded-full text-sm">
+                <div
+                  key={idx}
+                  className="flex items-center gap-2 bg-navy text-white px-3 py-1 rounded-full text-sm"
+                >
                   {item.icon?.startsWith("http") ? (
-                    <img src={item.icon} className="w-4 h-4 object-contain invert" alt="" onError={(e) => { e.target.style.display = "none"; }} />
+                    <img
+                      src={item.icon}
+                      className="w-4 h-4 object-contain invert"
+                      alt=""
+                      onError={(e) => {
+                        e.target.style.display = "none";
+                      }}
+                    />
                   ) : (
                     <span>{item.icon}</span>
                   )}
                   <span>{item.name}</span>
-                  <button type="button" onClick={() => handleRemoveTempItem(idx)} className="text-gold font-bold ml-1 hover:text-red-400">✕</button>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveTempItem(idx)}
+                    className="text-gold font-bold ml-1 hover:text-red-400"
+                  >
+                    ✕
+                  </button>
                 </div>
               ))}
             </div>
@@ -218,32 +237,73 @@ export default function SkillsManager() {
             {editingGroupId ? "Update Category" : "Save Category to Database"}
           </button>
           {editingGroupId && (
-            <button type="button" onClick={handleCancelEdit} className="px-8 py-3 bg-gray-300 text-gray-700 font-black uppercase tracking-widest rounded hover:bg-gray-400 w-full md:w-auto transition-all">
+            <button
+              type="button"
+              onClick={handleCancelEdit}
+              className="px-8 py-3 bg-gray-300 text-gray-700 font-black uppercase tracking-widest rounded hover:bg-gray-400 w-full md:w-auto transition-all"
+            >
               Cancel
             </button>
           )}
         </div>
       </div>
 
+      {/* 🌟 บล็อกแสดงลิสต์หมวดหมู่ (แก้ Responsive แล้ว) 🌟 */}
       <div className="space-y-4">
         {skills.map((skillGroup) => (
-          <div key={skillGroup._id || skillGroup.id} className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm relative">
-            <div className="absolute top-4 right-4 flex gap-2">
-              <button onClick={() => handleEditGroupClick(skillGroup)} className="text-blue-600 hover:bg-blue-50 px-3 py-1 rounded font-bold border border-blue-200 text-sm">Edit Group</button>
-              <button onClick={() => handleDeleteGroup(skillGroup._id || skillGroup.id)} className="text-red-500 hover:bg-red-50 px-3 py-1 rounded font-bold border border-red-200 text-sm">Delete Group</button>
+          <div
+            key={skillGroup._id || skillGroup.id}
+            className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col gap-4 hover:shadow-md transition-shadow"
+          >
+            {/* ส่วนหัว: ชื่อหมวดหมู่ + ปุ่ม Edit/Delete */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-3">
+              <h4 className="font-bold text-navy text-xl uppercase flex items-center m-0">
+                <span className="mr-2 text-2xl">
+                  {skillGroup.category_image}
+                </span>
+                {skillGroup.category}
+              </h4>
+
+              <div className="flex gap-2 w-full sm:w-auto">
+                <button
+                  onClick={() => handleEditGroupClick(skillGroup)}
+                  className="text-blue-600 hover:bg-blue-50 px-4 py-1.5 rounded font-bold border border-blue-200 text-sm flex-1 sm:flex-none text-center transition-colors"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() =>
+                    handleDeleteGroup(skillGroup._id || skillGroup.id)
+                  }
+                  className="text-red-500 hover:bg-red-50 px-4 py-1.5 rounded font-bold border border-red-200 text-sm flex-1 sm:flex-none text-center transition-colors"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-            <h4 className="font-bold text-navy text-xl mb-4 border-b pb-2 w-[65%] uppercase">
-              <span className="mr-2">{skillGroup.category_image}</span>{skillGroup.category}
-            </h4>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+
+            {/* ส่วนไอเทมย่อยๆ (ทักษะ) */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {skillGroup.items?.map((item, index) => (
-                <div key={index} className="flex items-center gap-2 p-2 border border-gray-100 rounded bg-gray-50">
+                <div
+                  key={index}
+                  className="flex items-center gap-2 p-2 border border-gray-100 rounded-lg bg-gray-50 overflow-hidden"
+                >
                   {item.icon?.startsWith("http") ? (
-                    <img src={item.icon} alt="" className="w-6 h-6 object-contain shrink-0" />
+                    <img
+                      src={item.icon}
+                      alt=""
+                      className="w-6 h-6 object-contain shrink-0"
+                    />
                   ) : (
-                    <span className="text-sm">{item.icon}</span>
+                    <span className="text-sm shrink-0">{item.icon}</span>
                   )}
-                  <span className="text-sm font-semibold text-navy truncate">{item.name}</span>
+                  <span
+                    className="text-sm font-semibold text-navy truncate"
+                    title={item.name}
+                  >
+                    {item.name}
+                  </span>
                 </div>
               ))}
             </div>

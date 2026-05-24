@@ -31,12 +31,52 @@ export default function Hero({ profile }) {
         }}
       ></div>
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
-        <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" fill="none" className="w-full h-full">
-          <line x1="100" y1="0" x2="100" y2="600" stroke="#c9a84c" strokeWidth="1" />
-          <line x1="0" y1="200" x2="1200" y2="200" stroke="#c9a84c" strokeWidth="1" />
-          <line x1="300" y1="0" x2="300" y2="400" stroke="#c9a84c" strokeWidth="1" />
-          <line x1="300" y1="400" x2="600" y2="400" stroke="#c9a84c" strokeWidth="1" />
-          <line x1="900" y1="100" x2="1200" y2="100" stroke="#c9a84c" strokeWidth="1" />
+        <svg
+          viewBox="0 0 1200 600"
+          preserveAspectRatio="xMidYMid slice"
+          fill="none"
+          className="w-full h-full"
+        >
+          <line
+            x1="100"
+            y1="0"
+            x2="100"
+            y2="600"
+            stroke="#c9a84c"
+            strokeWidth="1"
+          />
+          <line
+            x1="0"
+            y1="200"
+            x2="1200"
+            y2="200"
+            stroke="#c9a84c"
+            strokeWidth="1"
+          />
+          <line
+            x1="300"
+            y1="0"
+            x2="300"
+            y2="400"
+            stroke="#c9a84c"
+            strokeWidth="1"
+          />
+          <line
+            x1="300"
+            y1="400"
+            x2="600"
+            y2="400"
+            stroke="#c9a84c"
+            strokeWidth="1"
+          />
+          <line
+            x1="900"
+            y1="100"
+            x2="1200"
+            y2="100"
+            stroke="#c9a84c"
+            strokeWidth="1"
+          />
           <circle cx="100" cy="200" r="5" fill="#c9a84c" />
           <circle cx="300" cy="400" r="5" fill="#c9a84c" />
           <circle cx="900" cy="100" r="5" fill="#c9a84c" />

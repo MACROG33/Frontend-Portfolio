@@ -41,7 +41,7 @@ export default function ProfileManager() {
   };
 
   const handleImageUpload = async (e) => {
-    const file = e.target.files[0]; // 🌟 แก้ไขจุดบั๊กเดิมจาก e.target.files เป็น .files[0] เพื่อให้ได้ไฟล์เดี่ยวที่ถูกต้อง
+    const file = e.target.files[0];
     if (!file) return;
     const uploadData = new FormData();
     uploadData.append("file", file);
@@ -61,21 +61,22 @@ export default function ProfileManager() {
 
   return (
     <div className="animate-fade-up">
-      <div className="flex justify-between items-end mb-6 border-b border-gray-200 pb-4">
+      {/* 🌟 ปรับ Header ให้ไม่เบียดกันถ้า Status แจ้งเตือนยาว */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 mb-6 border-b border-gray-200 pb-4">
         <h3 className="text-2xl font-black text-navy uppercase tracking-widest">
           Profile Settings
         </h3>
         {status && (
-          <span className="text-sm font-bold text-gold bg-navy-dark px-3 py-1 rounded">
+          <span className="text-sm font-bold text-gold bg-navy-dark px-3 py-1 rounded w-full sm:w-auto text-center sm:text-left">
             {status}
           </span>
         )}
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* รูปโปรไฟล์ */}
-        <div className="flex items-center gap-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
-          <div className="w-24 h-24 rounded-full border-4 border-gold overflow-hidden bg-navy">
+        {/* 🌟 รูปโปรไฟล์ (ปรับให้เรียงบนล่างในมือถือ และซ้ายขวาในคอม) */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 bg-gray-50 p-4 sm:p-6 rounded-xl border border-gray-100">
+          <div className="w-24 h-24 rounded-full border-4 border-gold overflow-hidden bg-navy shrink-0">
             {formData.profile_image ? (
               <img
                 src={formData.profile_image}
@@ -88,7 +89,7 @@ export default function ProfileManager() {
               </div>
             )}
           </div>
-          <div className="flex-1 space-y-2">
+          <div className="flex-1 space-y-2 w-full text-center sm:text-left">
             <label className="block text-sm font-bold text-navy uppercase">
               Profile Image URL
             </label>
@@ -100,12 +101,12 @@ export default function ProfileManager() {
               className="w-full p-2 border border-gray-300 rounded focus:border-gold focus:ring-1 focus:ring-gold outline-none"
               placeholder="https://res.cloudinary.com/..."
             />
-            <div className="text-sm text-gray-500">
-              หรืออัปโหลดไฟล์ใหม่:{" "}
+            <div className="text-sm text-gray-500 flex flex-col sm:flex-row items-center gap-2 mt-2">
+              <span>หรืออัปโหลดไฟล์ใหม่:</span>
               <input
                 type="file"
                 onChange={handleImageUpload}
-                className="text-sm ml-2 file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gold file:text-navy hover:file:bg-gold-light cursor-pointer"
+                className="text-sm file:mr-2 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gold file:text-navy hover:file:bg-gold-light cursor-pointer w-full sm:w-auto"
               />
             </div>
           </div>
@@ -196,11 +197,11 @@ export default function ProfileManager() {
           </div>
         </div>
 
-        {/* ปุ่ม Submit */}
+        {/* 🌟 ปุ่ม Submit ปรับให้เต็มจอในมือถือ */}
         <div className="pt-4">
           <button
             type="submit"
-            className="px-8 py-3 bg-gold hover:bg-gold-light text-navy-dark font-black uppercase tracking-widest rounded transition-all shadow-lg"
+            className="w-full md:w-auto px-8 py-3 bg-gold hover:bg-gold-light text-navy-dark font-black uppercase tracking-widest rounded transition-all shadow-lg text-center"
           >
             Save Changes
           </button>

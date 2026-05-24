@@ -31,7 +31,7 @@ export default function About({ profile }) {
               Focus
             </span>
             <span className="text-[#5a6a75] text-[0.95rem]">
-              Full-Stack / AI
+              Frontend / Backend / AI Development
             </span>
           </div>
           <div className="flex gap-3 items-center">
@@ -44,7 +44,7 @@ export default function About({ profile }) {
                   ? `mailto:${profile.email}`
                   : "mailto:66011212003@msu.ac.th"
               }
-              className="text-gold no-underline"
+              className="text-gold no-underline break-all"
             >
               {profile?.email || "66011212003@msu.ac.th"}
             </a>
@@ -57,7 +57,7 @@ export default function About({ profile }) {
           </div>
           <div className="mt-8">
             <a
-              href="/Resume_.pdf"
+              href="/Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-8 py-3 bg-navy text-gold font-black uppercase tracking-widest rounded hover:bg-navy-dark transition-all duration-200 border border-gold hover:shadow-[0_0_15px_rgba(201,168,76,0.3)]"

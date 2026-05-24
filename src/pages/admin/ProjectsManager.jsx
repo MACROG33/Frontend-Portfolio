@@ -7,7 +7,7 @@ export default function ProjectsManager() {
   const [projectForm, setProjectForm] = useState({
     title: "",
     description: "",
-    project_overview: "", // 🌟 1. เพิ่มฟิลด์ใน State หลักสำหรับรองรับข้อมูลภาพรวม
+    project_overview: "",
     tags: "",
     github_url: "",
     demo_url: "",
@@ -85,7 +85,7 @@ export default function ProjectsManager() {
       const formattedData = {
         title: projectForm.title,
         description: projectForm.description,
-        project_overview: projectForm.project_overview, // 🌟 2. แนบข้อมูลภาพรวมส่งไปที่ FastAPI
+        project_overview: projectForm.project_overview,
         tech_stack: projectForm.tags
           .split(",")
           .map((tag) => tag.trim())
@@ -129,7 +129,7 @@ export default function ProjectsManager() {
     setProjectForm({
       title: proj.title || "",
       description: proj.description || "",
-      project_overview: proj.project_overview || "", // 🌟 3. โหลดข้อมูลเดิมขึ้นมาโชว์ในช่องฟอร์มเมื่อกดแก้ไข
+      project_overview: proj.project_overview || "",
       tags: proj.tech_stack ? proj.tech_stack.join(", ") : "",
       github_url: proj.github_url || "",
       demo_url: proj.demo_url || "",
@@ -144,7 +144,7 @@ export default function ProjectsManager() {
     setProjectForm({
       title: "",
       description: "",
-      project_overview: "", // 🌟 4. รีเซ็ตค่าให้ว่างเมื่อยกเลิกการแก้ไข
+      project_overview: "",
       tags: "",
       github_url: "",
       demo_url: "",
@@ -170,7 +170,9 @@ export default function ProjectsManager() {
 
       <form
         onSubmit={handleSaveProject}
-        className={`p-6 rounded-xl border mb-8 space-y-6 transition-colors ${editingId ? "bg-gold/10 border-gold" : "bg-gray-50 border-gray-200"}`}
+        className={`p-6 rounded-xl border mb-8 space-y-6 transition-colors ${
+          editingId ? "bg-gold/10 border-gold" : "bg-gray-50 border-gray-200"
+        }`}
       >
         {editingId && (
           <div className="text-gold font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
@@ -274,7 +276,7 @@ export default function ProjectsManager() {
           ></textarea>
         </div>
 
-        {/* 🌟 5. บล็อกกรอกภาพรวมข้อสรุปของโปรเจกต์ (Project Overview) แยกเป็นสัดส่วน */}
+        {/* บล็อกกรอกภาพรวมข้อสรุปของโปรเจกต์ (Project Overview) */}
         <div>
           <label className="block text-sm font-bold text-gold uppercase mb-1 tracking-wider">
             Project Overview
@@ -343,14 +345,14 @@ export default function ProjectsManager() {
         </div>
       </form>
 
-      {/* บล็อกแสดงรายการลิสต์โปรเจกต์ด้านล่าง */}
+      {/* 🌟 บล็อกแสดงรายการลิสต์โปรเจกต์ด้านล่าง (แก้ Responsive แล้ว) 🌟 */}
       <div className="space-y-4">
         {projects.map((proj) => (
           <div
             key={proj._id || proj.id}
-            className="bg-white p-4 rounded-xl border border-gray-200 flex items-center justify-between shadow-sm hover:shadow-md transition-shadow"
+            className="bg-white p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between shadow-sm hover:shadow-md transition-shadow gap-4"
           >
-            <div className="flex items-center gap-4 max-w-[70%]">
+            <div className="flex items-center gap-4 w-full sm:max-w-[70%]">
               <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden shrink-0 border border-gray-100 flex items-center justify-center">
                 {proj.image_urls && proj.image_urls.length > 0 ? (
                   <img
@@ -362,11 +364,11 @@ export default function ProjectsManager() {
                   <span className="text-3xl">📁</span>
                 )}
               </div>
-              <div>
-                <h4 className="font-bold text-navy text-lg flex items-center gap-2">
-                  {proj.title}
+              <div className="flex-1 min-w-0">
+                <h4 className="font-bold text-navy text-lg flex items-center gap-2 flex-wrap">
+                  <span className="truncate">{proj.title}</span>
                   {proj.is_featured && (
-                    <span className="text-[10px] bg-gold/20 text-gold-dark px-2 py-0.5 rounded-full uppercase">
+                    <span className="text-[10px] bg-gold/20 text-gold-dark px-2 py-0.5 rounded-full uppercase shrink-0">
                       Featured
                     </span>
                   )}
@@ -376,16 +378,17 @@ export default function ProjectsManager() {
                 </p>
               </div>
             </div>
-            <div className="flex gap-2">
+
+            <div className="flex gap-2 w-full sm:w-auto justify-end border-t sm:border-0 pt-3 sm:pt-0 border-gray-100">
               <button
                 onClick={() => handleEditClick(proj)}
-                className="text-blue-600 hover:bg-blue-50 px-4 py-1.5 rounded font-bold transition-colors border border-blue-200 text-sm"
+                className="text-blue-600 hover:bg-blue-50 px-4 py-1.5 rounded font-bold transition-colors border border-blue-200 text-sm flex-1 sm:flex-none text-center"
               >
                 Edit
               </button>
               <button
                 onClick={() => handleDelete(proj._id || proj.id)}
-                className="text-red-500 hover:bg-red-50 px-4 py-1.5 rounded font-bold transition-colors border border-red-200 text-sm"
+                className="text-red-500 hover:bg-red-50 px-4 py-1.5 rounded font-bold transition-colors border border-red-200 text-sm flex-1 sm:flex-none text-center"
               >
                 Delete
               </button>
