@@ -10,8 +10,11 @@ export default function ProjectDetails() {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  //สำหรับเก็บ Index ของรูปภาพที่กำลังแสดงเป็นรูปใหญ่
+  // สำหรับเก็บ Index ของรูปภาพที่กำลังแสดงเป็นรูปใหญ่
   const [activeImageIdx, setActiveImageIdx] = useState(0);
+
+  // เก็บ Popup
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     const fetchProjectDetail = async () => {
@@ -27,6 +30,12 @@ export default function ProjectDetails() {
     fetchProjectDetail();
   }, [id]);
 
+  const handleImageClick = () => {
+    if (window.screen.width < 768 || window.innerWidth < 768) {
+      setIsPopupOpen(true);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-navy flex items-center justify-center text-gold font-condensed text-3xl font-black uppercase tracking-widest animate-pulse">
@@ -38,9 +47,7 @@ export default function ProjectDetails() {
   if (!project) {
     return (
       <div className="min-h-screen bg-navy flex flex-col items-center justify-center text-white gap-4 px-4 text-center">
-        <h2 className="text-2xl font-bold text-gold">
-          ❌ ไม่พบข้อมูลโปรเจกต์นี้
-        </h2>
+        <h2 className="text-2xl font-bold text-gold">ไม่พบข้อมูลโปรเจกต์นี้</h2>
         <button
           onClick={() => navigate("/")}
           className="px-6 py-2 bg-gold text-navy font-bold uppercase tracking-wider hover:bg-gold-light transition-all rounded"
@@ -52,10 +59,34 @@ export default function ProjectDetails() {
   }
 
   return (
-    <div className="min-h-screen bg-white-soft font-barlow overflow-x-hidden">
+    <div className="min-h-screen bg-white-soft font-barlow overflow-x-hidden relative">
       <Navbar activeSection="projects" />
 
-      {}
+      {/*หน้าต่าง Popup */}
+      {isPopupOpen && project.image_urls && project.image_urls.length > 0 && (
+        <div
+          className="fixed inset-0 z-[300] bg-black/90 md:hidden flex flex-col items-center justify-center p-4 backdrop-blur-sm animate-fade-in"
+          onClick={() => setIsPopupOpen(false)}
+        >
+          {/* ปุ่มกากบาทปิดที่มุมขวาบน */}
+          <div className="absolute top-6 right-6 text-white text-3xl font-light cursor-pointer select-none p-2 bg-black/40 rounded-full w-10 h-10 flex items-center justify-center active:scale-95 transition-transform">
+            ✕
+          </div>
+
+          {/* ตัวแสดงรูปภาพ */}
+          <div
+            className="w-full max-w-sm overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={project.image_urls[activeImageIdx]}
+              alt="Popup Preview"
+              className="w-full h-auto max-h-[80vh] object-contain rounded-xl shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
+
       <div className="min-h-screen text-text-main pt-24 pb-12 sm:pb-16 px-5 sm:px-[6%] md:px-[10%] lg:px-[6%] animate-fade-up">
         {/* ปุ่มย้อนกลับ */}
         <button
@@ -91,7 +122,11 @@ export default function ProjectDetails() {
           {/* ฝั่งซ้าย: รูปภาพ */}
           <div className="lg:col-span-7 space-y-4">
             {/*รูปภาพหลักขนาดใหญ่ */}
-            <div className="aspect-video w-full rounded-2xl overflow-hidden bg-navy border-2 border-gray-200 shadow-lg relative">
+            {}
+            <div
+              onClick={handleImageClick}
+              className="aspect-video w-full rounded-2xl overflow-hidden bg-navy border-2 border-gray-200 shadow-lg relative cursor-pointer md:cursor-default active:opacity-90 transition-opacity"
+            >
               {project.image_urls && project.image_urls.length > 0 ? (
                 <img
                   src={project.image_urls[activeImageIdx]}
@@ -141,7 +176,6 @@ export default function ProjectDetails() {
               <h3 className="font-condensed text-lg font-black text-navy uppercase tracking-widest mb-2 sm:mb-3">
                 Project Overview
               </h3>
-              {/*ใส่ break-words กันตัวหนังสือยาวล้นจอ */}
               <p className="text-sm sm:text-[1rem] leading-[1.7] text-[#5a6a75] whitespace-pre-line break-words">
                 {project.project_overview}
               </p>
