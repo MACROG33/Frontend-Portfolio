@@ -8,13 +8,13 @@ export default function About({ profile }) {
         <div className="text-[1rem] leading-[1.8] text-[#5a6a75]">
           <p>
             สวัสดีครับผม <strong>{profile?.name || "Palm"} </strong>
-            นักศึกษาและนักพัฒนาซอฟต์แวร์ที่หลงใหลในการแก้ปัญหาผ่านการเขียนโค้ด
-            ผมมีพื้นฐานในด้าน Full-stack Development
-            และมีความสนใจเป็นพิเศษในด้าน Machine Learning และ Computer Vision
-            ผมไม่ได้มองหาแค่การเขียนโค้ดให้เสร็จ
-            แต่ผมมองหาการสร้างผลลัพธ์ที่มีคุณภาพและตอบโจทย์ผู้ใช้งานจริง
-            ในฐานะคนที่พร้อมเรียนรู้สิ่งใหม่เสมอ
-            ผมตื่นเต้นที่จะได้นำทักษะของผมไปพัฒนาโปรเจกต์ที่ท้าทายและเติบโตไปพร้อมกับทีมงานมืออาชีพครับ
+            นิสิตวิทยาการคอมพิวเตอร์ที่มีประสบการณ์ลงมือทำจริงด้านการพัฒนาเว็บและโมบายล์แอปพลิเคชันแบบ
+            Full-Stack ควบคู่กับพื้นฐานที่แน่นในด้าน Machine Learning
+            มีความเชี่ยวชาญในการสร้างและพัฒนาแอปพลิเคชันให้ใช้งานได้จริง
+            โดยมุ่งเน้นเรื่องการเขียนโค้ดที่สะอาด มีประสิทธิภาพ
+            และตอบโจทย์ผู้ใช้งาน เป็นคนเรียนรู้ระบบใหม่ ๆ ได้รวดเร็ว
+            แก้ไขปัญหาได้อย่างมีประสิทธิภาพ และทำงานร่วมกับทีมได้ดี
+            พร้อมนำทักษะทางเทคนิคมาใช้ในการพัฒนาซอฟต์แวร์ที่เสถียรและสร้างผลลัพธ์ที่ดีให้กับองค์กร
           </p>
         </div>
         <div className="flex flex-col gap-4">
@@ -57,7 +57,7 @@ export default function About({ profile }) {
           </div>
           <div className="mt-8">
             <a
-              href="https://res.cloudinary.com/dsdepkz4h/image/upload/v1779476107/Resume__j3ln05.pdf"
+              href="https://res.cloudinary.com/dsdepkz4h/image/upload/v1783063435/Professional_Modern_CV_Resume_eqbfxv.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-8 py-3 bg-navy text-gold font-black uppercase tracking-widest rounded hover:bg-navy-dark transition-all duration-200 border border-gold hover:shadow-[0_0_15px_rgba(201,168,76,0.3)]"
