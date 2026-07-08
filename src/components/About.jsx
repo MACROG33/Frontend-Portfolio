@@ -57,7 +57,7 @@ export default function About({ profile }) {
           </div>
           <div className="mt-8">
             <a
-              href="https://res.cloudinary.com/dsdepkz4h/image/upload/v1783063435/Professional_Modern_CV_Resume_eqbfxv.pdf"
+              href="https://res.cloudinary.com/dsdepkz4h/image/upload/v1783511826/Resume_Kitsanaphon_sukdee_iwnod4.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-8 py-3 bg-navy text-gold font-black uppercase tracking-widest rounded hover:bg-navy-dark transition-all duration-200 border border-gold hover:shadow-[0_0_15px_rgba(201,168,76,0.3)]"
