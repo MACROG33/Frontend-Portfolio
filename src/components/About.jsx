@@ -8,13 +8,12 @@ export default function About({ profile }) {
         <div className="text-[1rem] leading-[1.8] text-[#5a6a75]">
           <p>
             สวัสดีครับผม <strong>{profile?.name || "Palm"} </strong>
-            นิสิตวิทยาการคอมพิวเตอร์ที่มีประสบการณ์ลงมือทำจริงด้านการพัฒนาเว็บและโมบายล์แอปพลิเคชันแบบ
-            Full-Stack ควบคู่กับพื้นฐานที่แน่นในด้าน Machine Learning
-            มีความเชี่ยวชาญในการสร้างและพัฒนาแอปพลิเคชันให้ใช้งานได้จริง
-            โดยมุ่งเน้นเรื่องการเขียนโค้ดที่สะอาด มีประสิทธิภาพ
-            และตอบโจทย์ผู้ใช้งาน เป็นคนเรียนรู้ระบบใหม่ ๆ ได้รวดเร็ว
-            แก้ไขปัญหาได้อย่างมีประสิทธิภาพ และทำงานร่วมกับทีมได้ดี
-            พร้อมนำทักษะทางเทคนิคมาใช้ในการพัฒนาซอฟต์แวร์ที่เสถียรและสร้างผลลัพธ์ที่ดีให้กับองค์กร
+            นิสิตวิทยาการคอมพิวเตอร์ที่สนใจด้าน Full-Stack Development, Mobile
+            Application และ Machine Learning มีประสบการณ์พัฒนาโปรเจกต์ทั้ง
+            Frontend, Backend, ฐานข้อมูล และการนำโมเดล AI มาใช้งานจริง
+            ผมเป็นคนเรียนรู้เร็ว ชอบแก้ปัญหา
+            และให้ความสำคัญกับโค้ดที่อ่านง่ายและใช้งานได้จริง
+            พร้อมนำทักษะที่มีไปเรียนรู้และพัฒนาต่อในสภาพแวดล้อมการทำงานจริง
           </p>
         </div>
         <div className="flex flex-col gap-4">
@@ -31,7 +30,7 @@ export default function About({ profile }) {
               Focus
             </span>
             <span className="text-[#5a6a75] text-[0.95rem]">
-              Frontend / Backend / AI Development
+              Full-Stack / Mobile / AI Development
             </span>
           </div>
           <div className="flex gap-3 items-center">
