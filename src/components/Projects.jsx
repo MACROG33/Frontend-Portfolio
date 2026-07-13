@@ -4,7 +4,7 @@ export default function Projects({ projects }) {
   return (
     <section id="projects" className="py-20 px-[6%] bg-white-soft">
       <h2 className="font-condensed text-3xl font-black tracking-[2px] uppercase text-navy mb-10 relative inline-block after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-10 after:h-[3px] after:bg-gold reveal">
-        Projects
+        PROJECTS & ACTIVITIES
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((proj) => (
