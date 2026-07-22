@@ -14,7 +14,6 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
 
-  // ดึงข้อมูลครั้งเดียวจาก API ชุดหลัก
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,7 +35,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  //ตั้งค่าการจับแอนิเมชัน Intersection Observer และระบบสกรอลเมาส์
+  // Intersection Observer
   useEffect(() => {
     if (loading) return;
 
@@ -70,30 +69,17 @@ export default function Home() {
     };
   }, [loading]);
 
-  if (loading)
-    return (
-      <div className="min-h-screen bg-navy flex flex-col items-center justify-center text-center px-4">
-        <div className="text-gold font-condensed text-3xl font-black uppercase tracking-widest animate-pulse mb-3">
-          Loading...
-        </div>
-        <div className="text-slate-300 text-sm md:text-base font-light tracking-wide animate-pulse">
-          กำลังปลุกเซิร์ฟเวอร์หลังบ้าน... <br className="hidden md:block" />
-          (ระบบอาจใช้เวลาเริ่มต้นประมาณ 50 วินาที รอนิดนึงนะครับ!)
-        </div>
-      </div>
-    );
-
   return (
     <div className="font-barlow bg-white-soft text-text-main overflow-x-hidden">
       <Navbar activeSection={activeSection} />
 
-      <Hero profile={profile} />
+      <Hero profile={profile} isLoading={loading} />
 
-      <About profile={profile} />
+      <About profile={profile} isLoading={loading} />
 
-      <Skills skills={skills} />
+      <Skills skills={skills} isLoading={loading} />
 
-      <Projects projects={projects} />
+      <Projects projects={projects} isLoading={loading} />
 
       {/* ─── FOOTER ─── */}
       <footer

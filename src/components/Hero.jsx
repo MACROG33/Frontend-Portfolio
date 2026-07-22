@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 export default function Hero({ profile }) {
   const [displayedName, setDisplayedName] = useState("");
-  const fullName = profile?.name || "PALM";
+  const fullName = profile?.name;
 
   useEffect(() => {
     let currentIndex = 0;
