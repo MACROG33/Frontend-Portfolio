@@ -59,9 +59,34 @@ export default function ProfileManager() {
     }
   };
 
+  const handleResumeUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.type !== "application/pdf") {
+      setStatus("⚠️ กรุณาอัปโหลดไฟล์ PDF เท่านั้น");
+      return;
+    }
+
+    const uploadData = new FormData();
+    uploadData.append("file", file);
+    setStatus("Uploading resume...");
+    try {
+      const res = await axios.post(`${API_BASE_URL}/uploads/`, uploadData);
+      setFormData({
+        ...formData,
+        resume_url: res.data.url || res.data.file_url,
+      });
+      setStatus("✅ อัปโหลด Resume สำเร็จ! (อย่าลืมกด Save)");
+    } catch (error) {
+      console.error(error);
+      setStatus("❌ อัปโหลด Resume ล้มเหลว");
+    }
+  };
+
   return (
     <div className="animate-fade-up">
-      {/* 🌟 ปรับ Header ให้ไม่เบียดกันถ้า Status แจ้งเตือนยาว */}
+      {/* 🌟 Header แจ้งเตือน รองรับ Mobile */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 mb-6 border-b border-gray-200 pb-4">
         <h3 className="text-2xl font-black text-navy uppercase tracking-widest">
           Profile Settings
@@ -74,7 +99,7 @@ export default function ProfileManager() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* 🌟 รูปโปรไฟล์ (ปรับให้เรียงบนล่างในมือถือ และซ้ายขวาในคอม) */}
+        {/* 🌟 รูปโปรไฟล์ */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 bg-gray-50 p-4 sm:p-6 rounded-xl border border-gray-100">
           <div className="w-24 h-24 rounded-full border-4 border-gold overflow-hidden bg-navy shrink-0">
             {formData.profile_image ? (
@@ -105,10 +130,49 @@ export default function ProfileManager() {
               <span>หรืออัปโหลดไฟล์ใหม่:</span>
               <input
                 type="file"
+                accept="image/*"
                 onChange={handleImageUpload}
                 className="text-sm file:mr-2 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gold file:text-navy hover:file:bg-gold-light cursor-pointer w-full sm:w-auto"
               />
             </div>
+          </div>
+        </div>
+
+        {/* 🌟 บล็อกจัดการ Resume (ปรับแต่ง Mobile Responsive เพิ่มเติม) */}
+        <div className="bg-gray-50 p-4 sm:p-6 rounded-xl border border-gray-100 space-y-3">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1">
+            <label className="block text-sm font-bold text-navy uppercase">
+              Resume (PDF)
+            </label>
+            {formData.resume_url && (
+              <a
+                href={formData.resume_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-gold font-bold hover:underline break-all"
+              >
+                📄 ดู Resume ปัจจุบัน
+              </a>
+            )}
+          </div>
+
+          <input
+            type="text"
+            name="resume_url"
+            value={formData.resume_url}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded focus:border-gold focus:ring-1 focus:ring-gold outline-none"
+            placeholder="https://res.cloudinary.com/.../resume.pdf"
+          />
+
+          <div className="text-sm text-gray-500 flex flex-col sm:flex-row items-start sm:items-center gap-2 mt-2">
+            <span className="shrink-0">หรืออัปโหลดไฟล์ PDF ใหม่:</span>
+            <input
+              type="file"
+              accept=".pdf"
+              onChange={handleResumeUpload}
+              className="text-sm file:mr-2 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-navy file:text-gold hover:file:bg-navy-dark cursor-pointer w-full sm:w-auto"
+            />
           </div>
         </div>
 
@@ -197,7 +261,7 @@ export default function ProfileManager() {
           </div>
         </div>
 
-        {/* 🌟 ปุ่ม Submit ปรับให้เต็มจอในมือถือ */}
+        {/* ปุ่ม Submit */}
         <div className="pt-4">
           <button
             type="submit"

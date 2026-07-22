@@ -1,4 +1,5 @@
 export default function About({ profile }) {
+  const resumeUrl = profile?.resume_url || "#";
   return (
     <section id="about" className="py-20 px-[6%] bg-white-soft">
       <h2 className="font-condensed text-3xl font-black tracking-[2px] uppercase text-navy mb-10 relative inline-block after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-10 after:h-[3px] after:bg-gold">
@@ -56,7 +57,7 @@ export default function About({ profile }) {
           </div>
           <div className="mt-8">
             <a
-              href="https://res.cloudinary.com/dsdepkz4h/image/upload/v1783953667/Resume_Kitsanaphon_sukdee_p79rji.pdf"
+              href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-8 py-3 bg-navy text-gold font-black uppercase tracking-widest rounded hover:bg-navy-dark transition-all duration-200 border border-gold hover:shadow-[0_0_15px_rgba(201,168,76,0.3)]"
